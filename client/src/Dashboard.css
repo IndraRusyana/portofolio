@@ -1,0 +1,140 @@
+body {
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* === WARNA CUSTOM UNTUK TEMA === */
+    [data-bs-theme="light"] {
+        --sidebar-bg: #212529;
+        --sidebar-text: rgba(255,255,255,0.7);
+        --body-bg: #f4f6f9;
+    }
+
+    [data-bs-theme="dark"] {
+        --sidebar-bg: #111315; /* Lebih gelap dikit dari default */
+        --sidebar-text: rgba(255,255,255,0.7);
+        --body-bg: #0d1117; /* GitHub Dark Mode style */
+    }
+
+    body {
+        background-color: var(--body-bg);
+    }
+
+    /* === SIDEBAR STYLE === */
+    #wrapper {
+        display: flex;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    #sidebar-wrapper {
+        min-height: 100vh;
+        width: 260px;
+        margin-left: 0;
+        background-color: #212529 !important;
+        transition: margin 0.25s ease-out;
+        position: fixed;
+        z-index: 1000;
+    }
+
+    .sidebar-heading {
+        padding: 1.5rem 1.25rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: white !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .list-group-item {
+        background-color: transparent;
+        color: var(--sidebar-text);
+        border: none;
+        padding: 15px 20px;
+        font-weight: 500;
+    }
+
+    .list-group-item:hover, .list-group-item.active {
+        background-color: rgba(255,255,255,0.1);
+        color: #fff;
+        border-left: 4px solid #0d6efd;
+    }
+
+    #sidebar-wrapper .list-group-item {
+        /* Ini kuncinya: ubah background putih bawaan jadi transparan */
+        background-color: transparent !important; 
+        
+        /* Warna teks abu-abu terang */
+        color: rgba(255,255,255,0.7) !important; 
+        border: none; /* Hapus garis batas bawaan */
+        padding: 15px 20px;
+        font-weight: 500;
+    }
+
+    /* 3. Saat Mouse Hover (Disorot) */
+    #sidebar-wrapper .list-group-item:hover {
+        background-color: rgba(255,255,255,0.1) !important; /* Putih transparan */
+        color: #fff !important; /* Teks jadi putih terang */
+    }
+
+    /* 4. Saat Menu Aktif (Sedang dibuka) */
+    #sidebar-wrapper .list-group-item.active {
+        background-color: #0d6efd !important; /* Biru Bootstrap */
+        color: #fff !important;
+        border-left: 4px solid white; /* Opsional: Tambah garis aksen */
+    }
+
+    /* Tombol Logout Merah */
+    #sidebar-wrapper .list-group-item.text-danger {
+        color: #dc3545 !important;
+    }
+    #sidebar-wrapper .list-group-item.text-danger:hover {
+        background-color: rgba(220, 53, 69, 0.1) !important; /* Merah transparan saat hover */
+    }
+
+    /* === CONTENT STYLE === */
+    #page-content-wrapper {
+        width: 100%;
+        margin-left: 260px;
+        padding: 20px;
+    }
+
+    /* Stats Cards */
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        /* Gunakan var bootstrap agar otomatis gelap/terang */
+        background-color: var(--bs-card-bg); 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-5px); }
+    
+    .icon-box {
+        width: 50px; height: 50px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 10px;
+        font-size: 1.2rem;
+    }
+
+    /* Table Styling */
+    .table-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        overflow: hidden;
+        background-color: var(--bs-card-bg);
+    }
+    
+    /* Navbar custom */
+    .navbar-custom {
+        background-color: var(--bs-body-bg); /* Ikut warna body tapi lebih terang dikit di bootstrap */
+    }
+    [data-bs-theme="light"] .navbar-custom { background-color: white; }
+    [data-bs-theme="dark"] .navbar-custom { background-color: #161b22; border-bottom: 1px solid #30363d; }
+
+
+    .project-img {
+        width: 40px; height: 40px;
+        object-fit: cover;
+        border-radius: 8px;
+    }

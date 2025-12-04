@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Professional Design</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #eceff1;
+        }
+        
+        /* Layout Utama agar memenuhi layar */
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden; /* Agar gambar tidak keluar dari radius border */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+        }
+
+        /* Bagian Kiri: Gambar */
+        .login-image {
+            width: 50%;
+            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: none; /* Disembunyikan di mobile */
+        }
+
+        /* Overlay gelap di atas gambar agar teks terbaca */
+        .img-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 110, 253, 0.7), rgba(0, 0, 0, 0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            color: white;
+        }
+
+        /* Bagian Kanan: Form */
+        .login-form-container {
+            width: 100%;
+            padding: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .login-image { display: block; }
+            .login-form-container { width: 50%; }
+        }
+
+        /* Styling Input Field yang lebih cantik */
+        .form-control {
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0d6efd;
+            background-color: #fcfcfc;
+        }
+
+        /* Styling Button */
+        .btn-primary {
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="login-wrapper">
+        <div class="login-card">
+            
+            <div class="login-image">
+                <div class="img-overlay">
+                    <h2 class="fw-bold">Welcome Back!</h2>
+                    <p class="mb-0 opacity-75">Kelola dashboard portfolio dan project Anda dengan mudah dalam satu tempat.</p>
+                </div>
+            </div>
+
+            <div class="login-form-container">
+                <a href="#" class="brand-logo text-decoration-none">
+                    <i class="fas fa-layer-group me-2"></i>DevFolio<span class="text-dark">Admin</span>
+                </a>
+
+                <h3 class="fw-bold mb-1">Masuk Akun</h3>
+                <p class="text-muted mb-4 small">Silakan masukkan kredensial Anda untuk melanjutkan.</p>
+
+                <form>
+                    
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Username / Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-user text-muted"></i></span>
+                            <input type="text" class="form-control bg-light border-0" placeholder="Masukkan username admin" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label small fw-bold text-muted">Password</label>
+                            <a href="#" class="small text-decoration-none text-primary">Lupa Password?</a>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-lock text-muted"></i></span>
+                            <input type="password" class="form-control bg-light border-0" placeholder="Masukkan password Anda" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        Login Dashboard <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+
+                    <div class="text-center">
+                        <small class="text-muted">Kembali ke <a href="/" class="text-primary fw-bold text-decoration-none">Halaman Utama</a></small>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

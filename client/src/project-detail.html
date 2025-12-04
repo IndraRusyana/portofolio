@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Project - DevFolio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* === WARNA CUSTOM & DARK MODE === */
+        
+        /* Navbar Glass Effect */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        [data-bs-theme="dark"] .navbar {
+            background-color: rgba(13, 17, 23, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Fix Background Abu-abu di Dark Mode */
+        [data-bs-theme="dark"] .bg-light {
+            background-color: #161b22 !important; /* Abu-abu gelap */
+            border-color: #30363d !important;
+            color: #e6edf3;
+        }
+
+        /* Fix Text Muted di Dark Mode */
+        [data-bs-theme="dark"] .text-muted {
+            color: #8b949e !important;
+        }
+
+        /* Fix Badge Tech Stack di Dark Mode */
+        [data-bs-theme="dark"] .badge-tech {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+            border: 1px solid rgba(56, 139, 253, 0.4);
+        }
+
+        /* Gambar Project */
+        .project-detail-img {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        [data-bs-theme="dark"] .project-detail-img {
+            border-color: rgba(255,255,255,0.1);
+            filter: brightness(0.9);
+        }
+
+        /* Kotak Tantangan Teknis */
+        .challenge-box {
+            background-color: #f8f9fa; /* Light default */
+        }
+        [data-bs-theme="dark"] .challenge-box {
+            background-color: rgba(220, 53, 69, 0.1); /* Merah transparan */
+            color: #ffc1c1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="index.html">DEV<span class="text-body">FOLIO.</span></a>
+            <button class="btn btn-outline-secondary rounded-circle ms-auto" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container py-5" style="margin-top: 80px;"> 
+      
+        <a href="index.html#projects" class="btn btn-outline-secondary mb-4">
+            <i class="fas fa-arrow-left me-2"></i> Kembali ke Home
+        </a>
+  
+        <div class="row">
+            
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <img 
+                    src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="E-Commerce App" 
+                    class="img-fluid rounded-4 shadow mb-4 project-detail-img"
+                >
+                
+                <h1 className="fw-bold mb-3">E-Commerce Web App</h1>
+                
+                <div class="d-flex gap-2 mb-4">
+                    <a href="#" target="_blank" class="btn btn-dark d-flex align-items-center gap-2">
+                        <i class="fab fa-github"></i> Source Code
+                    </a>
+                    <a href="#" target="_blank" class="btn btn-primary d-flex align-items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+  
+                <div class="mb-4">
+                    <h5 class="fw-bold text-secondary text-uppercase small mb-3">Tech Stack</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">React JS</span>
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">Node.js</span>
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">Express</span>
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">PostgreSQL</span>
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">Redux</span>
+                        <span class="badge bg-light text-dark border py-2 px-3 badge-tech">Bootstrap 5</span>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="col-lg-7 ps-lg-5">
+            
+                <div class="mb-5">
+                    <h4 class="fw-bold border-bottom pb-2 mb-3">Tentang Project</h4>
+                    <p class="lead text-muted">
+                        Sebuah aplikasi E-Commerce lengkap yang memungkinkan pengguna untuk mencari produk, menambahkan ke keranjang, dan melakukan pembayaran simulasi. Dibangun dengan fokus pada performa dan skalabilitas database.
+                    </p>
+                </div>
+  
+                <div class="mb-5">
+                    <h5 class="fw-bold d-flex align-items-center">
+                        <i class="fas fa-lightbulb text-warning me-2"></i> Latar Belakang
+                    </h5>
+                    <p class="text-body-secondary">
+                        Project ini dibuat untuk menjawab kebutuhan UMKM yang ingin beralih ke digital. Tantangan utamanya adalah bagaimana menangani ribuan data produk dan transaksi secara real-time tanpa membuat server down. Saya memutuskan menggunakan PostgreSQL karena keandalannya dalam menangani relasi data yang kompleks.
+                    </p>
+                </div>
+  
+                <div class="mb-5">
+                    <h5 class="fw-bold d-flex align-items-center">
+                        <i class="fas fa-star text-primary me-2"></i> Fitur Utama
+                    </h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent px-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Sistem Autentikasi JWT (Login/Register)</li>
+                        <li class="list-group-item bg-transparent px-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Keranjang Belanja Real-time</li>
+                        <li class="list-group-item bg-transparent px-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Integrasi Payment Gateway (Midtrans Dummy)</li>
+                        <li class="list-group-item bg-transparent px-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Dashboard Admin untuk Manajemen Stok</li>
+                    </ul>
+                </div>
+  
+                <div class="mb-4">
+                    <h5 class="fw-bold text-danger d-flex align-items-center">
+                        <i class="fas fa-fire me-2"></i> Tantangan Teknis
+                    </h5>
+                    <div class="p-4 challenge-box border-start border-4 border-danger rounded">
+                        <p class="mb-0">
+                            Salah satu kesulitan terbesar adalah menangani "Race Condition" saat dua user membeli produk terakhir secara bersamaan. Solusinya, saya menerapkan <strong>Database Transaction</strong> dan <strong>Row Locking</strong> di PostgreSQL untuk memastikan konsistensi stok.
+                        </p>
+                    </div>
+                </div>
+            
+                <div class="alert alert-info mt-5 d-flex align-items-center shadow-sm">
+                    <i class="fas fa-info-circle fa-2x me-3"></i>
+                    <div>
+                        <strong>Status Pengembangan:</strong> <br>
+                        Project ini masih dalam tahap pengembangan fitur "Wishlist" dan perbaikan UI mobile.
+                    </div>
+                </div>
+  
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
+        const htmlElement = document.documentElement;
+
+        // Cek LocalStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-bs-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    </script>
+
+</body>
+</html>
