@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./config/db'); // Import koneksi DB tadi
+const pool = require('./Config/db'); // Import koneksi DB tadi
 const path = require('path');
 require('dotenv').config();
 

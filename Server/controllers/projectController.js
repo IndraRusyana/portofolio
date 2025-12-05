@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const pool = require('../Config/db');
 const fs = require('fs'); // Untuk menghapus gambar lama jika perlu (opsional)
 
 // 1. GET: Ambil semua project (Tidak berubah)
