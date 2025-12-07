@@ -52,7 +52,8 @@ const AddProject = () => {
         formData.append('image', file);
       }
 
-      await axios.post('http://localhost:5000/api/projects', formData, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      await axios.post(`${apiUrl}/api/projects`, formData, {
         headers: { 
           token: token,
         }

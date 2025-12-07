@@ -24,7 +24,8 @@ const EditProject = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/projects/${id}`);
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await axios.get(`${apiUrl}/api/projects/${id}`);
         const data = response.data;
 
         // Populate State
@@ -94,7 +95,8 @@ const EditProject = () => {
       }
 
       // Kirim Request
-      await axios.put(`http://localhost:5000/api/projects/${id}`, formData, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      await axios.put(`${apiUrl}/api/projects/${id}`, formData, {
         headers: { 
           token: token,
           // Jangan set Content-Type manual, biarkan Axios yang atur

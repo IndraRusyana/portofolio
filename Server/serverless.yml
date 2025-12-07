@@ -1,0 +1,48 @@
+# Nama layanan. Ini akan jadi prefix nama resource di AWS nanti.
+service: portfolio 
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x  # Versi Node.js di Lambda
+  region: ap-southeast-3    # Lokasi server (Pilih: ap-southeast-1 untuk Singapura/Terdekat)
+  memorySize: 512      # RAM untuk Lambda (Default 1024MB, 512MB hemat biaya)
+  timeout: 10          # Maksimal durasi fungsi berjalan (detik) sebelum dimatikan paksa
+  
+  # Environment Variables yang akan ditanam di Lambda
+  environment:
+    # Mengambil value dari file .env lokal saat proses deploy
+    DATABASE_URL: ${.env:DATABASE_URL}
+
+package:
+  patterns:
+    - '!node_modules/.cache/**'      # Abaikan cache npm
+    - '!node_modules/**/*.md'        # Abaikan file README di library
+    - '!node_modules/**/*.ts'        # Abaikan file TypeScript mentah di library
+    - '!node_modules/**/*.map'       # Abaikan source maps
+    - '!.git/**'                     # Abaikan folder git (sangat penting!)
+    - '!.vscode/**'                  # Abaikan setting vscode
+    - '!test/**'                     # Abaikan folder test anda
+    - '!tests/**'
+    - '!README.md'
+
+plugins:
+  - serverless-dotenv-plugin
+
+functions:
+  api:
+    # Menunjuk file 'app.js' dan function yang diexport bernama 'handler'
+    handler: index.handler 
+    
+    # Event mendefinisikan KAPAN fungsi ini jalan.
+    # Di sini kita pakai HTTP (via API Gateway)
+    events:
+      - http:
+          path: /
+          method: ANY     # Menerima GET, POST, PUT, DELETE, dll.
+          cors: true      # Mengaktifkan CORS di level API Gateway
+      - http:
+          path: /{proxy+} # WILDCARD SAKTI!
+          method: ANY
+          cors: true

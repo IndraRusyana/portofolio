@@ -19,7 +19,7 @@ const PageContent = ({ theme, toggleTheme }) => {
     const fetchProjects = async () => {
         try {
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        const response = await axios.get('http://localhost:5000/api/projects');
+        const response = await axios.get(`${apiUrl}/api/projects`);
         setProjects(response.data);
         } catch (error) {
         console.error(error);
@@ -31,7 +31,8 @@ const PageContent = ({ theme, toggleTheme }) => {
         try {
             const token = localStorage.getItem('token');
             // PENTING: Kirim token di header
-            await axios.delete(`http://localhost:5000/api/projects/${id}`, {
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            await axios.delete(`${apiUrl}/api/projects/${id}`, {
             headers: { token: token }
             });
             // Refresh data setelah hapus
