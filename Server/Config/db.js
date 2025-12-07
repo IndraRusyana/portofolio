@@ -10,10 +10,10 @@ const pool = new Pool({
   port: process.env.DB_PORT,
   
   // koneksi ke neon.tech (postgre)
-  // connectionString: process.env.DATABASE_URL,
-  // ssl: {
-  //   rejectUnauthorized: false, // Penting untuk koneksi SSL Neon
-  // },
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Penting untuk koneksi SSL Neon
+  },
 });
 
 // Tes koneksi saat aplikasi jalan
