@@ -4,7 +4,7 @@ require('dotenv').config();
 module.exports = async (req, res, next) => {
   try {
     // 1. Ambil token dari header (Authorization: Bearer <token>)
-    const jwtToken = req.header("token");
+    const jwtToken = req.header('Authorization')?.replace('Bearer ', '');
 
     if (!jwtToken) {
       return res.status(403).json("Tidak diizinkan (Not Authorized)");

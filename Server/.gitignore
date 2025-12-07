@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 .env
 .serverless
+portfolio-api_accessKeys.csv
 dist
 dist-ssr
 *.local

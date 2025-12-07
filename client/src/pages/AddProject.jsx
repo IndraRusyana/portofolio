@@ -55,7 +55,7 @@ const AddProject = () => {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       await axios.post(`${apiUrl}/api/projects`, formData, {
         headers: { 
-          token: token,
+          'Authorization': `Bearer ${token}`
         }
       });
 
