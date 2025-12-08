@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-const PageContent = ({ theme, toggleTheme }) => {
+const PageContent = ({ theme, toggleTheme, toggleSidebar }) => {
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
 
@@ -62,10 +62,19 @@ const PageContent = ({ theme, toggleTheme }) => {
         <div id="page-content-wrapper">
         
         <nav className="navbar navbar-custom shadow-sm rounded-3 mb-4 px-3 d-flex justify-content-between align-items-center">
-            
-            <h4 className="mb-0 fw-bold">Dashboard Overview</h4>
-            
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center">
+                {/* 2. TOMBOL HAMBURGER (SIDEBAR TOGGLE) */}
+                <button 
+                    className="btn btn-link text-body me-3" 
+                    id="sidebarToggle" 
+                    onClick={toggleSidebar}
+                >
+                    <i className="fas fa-bars fa-lg"></i>
+                </button>
+
+                <h4 className="mb-0 fw-bold d-none d-sm-block">Dashboard</h4> {/* Sembunyikan teks panjang di HP */}
+            </div>
+            <div className="d-flex align-items-center gap-2 gap-md-3">
                 <button 
                         className="btn btn-outline-secondary rounded-circle" 
                         onClick={toggleTheme} 
@@ -75,15 +84,16 @@ const PageContent = ({ theme, toggleTheme }) => {
                         <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
                     </button>
 
-                <Link to="/admin/add" className="btn btn-primary">
-                    <i className="fas fa-plus me-2"></i> New Project
+                <Link to="/admin/add" className="btn btn-primary btn-sm btn-md">
+                    <i className="fas fa-plus me-md-2"></i>
+                    <span className="d-none d-md-inline">New Project</span>
                 </Link>
                 <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D6EFD&color=fff" className="rounded-circle" width="40" />
             </div>
         </nav>
 
         <div className="row g-3 mb-4">
-            <div className="col-md-4">
+            <div className="col-12 col-sm-6 col-xl-4">
                 <div className="card stat-card p-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <div>
@@ -96,7 +106,7 @@ const PageContent = ({ theme, toggleTheme }) => {
                     </div>
                 </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-sm-6 col-xl-4">
                 <div className="card stat-card p-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <div>
@@ -109,7 +119,7 @@ const PageContent = ({ theme, toggleTheme }) => {
                     </div>
                 </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-sm-12 col-xl-4">
                 <div className="card stat-card p-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <div>
@@ -130,7 +140,7 @@ const PageContent = ({ theme, toggleTheme }) => {
             </div>
             <div className="card-body p-0">
                 <div className="table-responsive">
-                    <table className="table table-hover mb-0 align-middle">
+                    <table className="table table-hover mb-0 align-middle text-nowrap">
                         <thead className="table-light">
                             <tr>
                                 <th className="ps-4">Project Info</th>

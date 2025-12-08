@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
-// Import Components
 import Sidebar from '../components/Sidebar';
 import PageContent from '../components/PageContent';
-
-// Import CSS
 import '../Dashboard.css';
-// import '../Dashboard.js';
 
 const Dashboard = () => {
-  // Cek localStorage dulu agar saat refresh tema tidak kembali ke light
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  
+  // 1. STATE UNTUK SIDEBAR
+  // Default false (tertutup) jika di mobile agar rapi, tapi logic CSS kita mengatur default CSS-nya.
+  // Kita gunakan state ini untuk menambah class 'toggled' di wrapper.
+  const [isSidebarToggled, setIsSidebarToggled] = useState(false);
 
-  // Effect untuk update atribut HTML & LocalStorage
   useEffect(() => {
     document.documentElement.setAttribute('data-bs-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Fungsi Toggle yang akan dikirim ke anak
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  // 2. FUNGSI TOGGLE SIDEBAR
+  const toggleSidebar = () => {
+    setIsSidebarToggled(!isSidebarToggled);
   };
 
   return (
     <>
-    <div id="wrapper">
-        <Sidebar />
-        {/* KIRIM PROPS ke PageContent */}
-        <PageContent theme={theme} toggleTheme={toggleTheme} />
+    {/* 3. Tambahkan class 'toggled' berdasarkan state */}
+    <div id="wrapper" className={isSidebarToggled ? 'toggled' : ''}>
+        
+        {/* Kirim fungsi toggle ke Sidebar (opsional, jika ingin tutup saat klik menu di HP) */}
+        <Sidebar toggleSidebar={toggleSidebar} />
+        
+        {/* Kirim fungsi toggle ke PageContent (untuk tombol Hamburger) */}
+        <PageContent 
+            theme={theme} 
+            toggleTheme={toggleTheme} 
+            toggleSidebar={toggleSidebar} 
+        />
     </div>
     </>
   );
