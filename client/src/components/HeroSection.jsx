@@ -9,7 +9,7 @@ const HeroSection = () => {
             <div className="row align-items-center flex-column-reverse flex-lg-row">
                 
                 {/* --- TEKS (KIRI) --- */}
-                <div className="col-lg-7 mt-5 mt-lg-0 pe-lg-5">
+                <div className="col-lg-7 mt-5 mt-lg-0">
                     
                     {/* Sub-heading kecil & Rapi */}
                     <h6 className="text-secondary text-uppercase ls-2 mb-3 d-flex align-items-center gap-2">

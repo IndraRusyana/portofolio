@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Skills = () => {
-    // Data Skills (Mudah ditambah nanti)
+    // Data Skills
     const skills = [
         { name: "Bootstrap", icon: "fab fa-bootstrap", color: "text-primary" },
         { name: "JavaScript", icon: "fab fa-js", color: "text-warning" },
@@ -9,7 +9,6 @@ const Skills = () => {
         { name: "Node.js",    icon: "fab fa-node",  color: "text-success" },
         { name: "Laravel",    icon: "fab fa-laravel", color: "text-danger" },
         { name: "MySQL",      icon: "fas fa-database", color: "text-secondary" },
-        // Anda bisa menambah skill lain di sini, misal: Git, Docker, dll
         { name: "Git",        icon: "fab fa-git-alt", color: "text-danger" },
         { name: "Postman",    icon: "fas fa-paper-plane", color: "text-warning" },
     ];
