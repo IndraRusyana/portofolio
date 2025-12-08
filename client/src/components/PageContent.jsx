@@ -44,6 +44,18 @@ const PageContent = ({ theme, toggleTheme }) => {
         }
     };  
 
+    const getImageSrc = (url) => {
+        if (!url) return '/placeholder.jpg'; // Gambar default jika kosong
+        
+        // Jika URL dimulai dengan 'http', berarti itu Absolute URL (S3 atau Localhost Backend)
+        if (url.startsWith('http')) {
+            return url;
+        }
+        
+        // Jika tidak (Data lama/relative path), tambahkan Base URL Backend
+        return `${import.meta.env.VITE_API_URL}${url}`;
+    };
+
     return (
         <div id="page-content-wrapper">
         
@@ -131,7 +143,7 @@ const PageContent = ({ theme, toggleTheme }) => {
                                 <td className="ps-4">
                                     <div className="d-flex align-items-center">
                                         <img 
-                                            src={project.image_url || "https://via.placeholder.com/100"} 
+                                            src={getImageSrc(project.image_url)} 
                                             className="project-img me-3" 
                                             alt="Project" 
                                         />

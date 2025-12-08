@@ -7,11 +7,7 @@ require('dotenv').config();
 // --- 1. KONFIGURASI S3 CLIENT ---
 // Inisialisasi hanya jika env variable ada
 const s3Client = new S3Client({
-  region: process.env.AWS_REGION || 'us-east-1',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
+  region: process.env.AWS_REGION || 'ap-southeast-3',
 });
 
 // --- 2. HELPER FUNCTION: UPLOAD HANDLER (Hybrid) ---
@@ -20,27 +16,34 @@ const uploadFileHandler = async (file, req) => {
 
   const timestamp = Date.now();
   const fileExtension = path.extname(file.originalname);
-  const fileName = `projects/${timestamp}-${path.basename(file.originalname, fileExtension)}${fileExtension}`;
+  // Hapus spasi di nama file agar URL aman
+  const cleanFileName = path.basename(file.originalname, fileExtension).replace(/\s+/g, '-');
+  const fileName = `projects/${timestamp}-${cleanFileName}${fileExtension}`;
 
-  // KONDISI A: PRODUCTION / AWS (Upload ke S3)
-  // Kita cek apakah Variable Bucket ada di .env
+  // KONDISI A: UPLOAD KE S3 (Jika AWS_BUCKET_NAME ada di .env)
   if (process.env.AWS_BUCKET_NAME) {
+    console.log("LOG: Mode Upload S3 Terdeteksi"); // Debugging
+
     const command = new PutObjectCommand({
       Bucket: process.env.AWS_BUCKET_NAME,
       Key: fileName,
-      Body: file.buffer, // Mengambil buffer dari memory
+      Body: file.buffer,
       ContentType: file.mimetype,
-      // ACL: 'public-read' // Opsional, tergantung bucket policy
     });
 
     await s3Client.send(command);
-    // Return URL S3
-    return `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${fileName}`;
+
+    // Ambil region yang sama persis dengan config client
+    const region = process.env.AWS_REGION || 'ap-southeast-3';
+    
+    // RETURN URL FORMAT BARU
+    return `https://${process.env.AWS_BUCKET_NAME}.s3.${region}.amazonaws.com/${fileName}`;
   } 
   
-  // KONDISI B: LOCAL DEVELOPMENT (Simpan ke folder uploads)
+  // KONDISI B: SIMPAN DI LOCAL DISK
   else {
-    // Pastikan folder uploads ada
+    console.log("LOG: Mode Upload Local Terdeteksi"); // Debugging
+
     const uploadDir = path.join(__dirname, '../uploads');
     if (!fs.existsSync(uploadDir)){
         fs.mkdirSync(uploadDir, { recursive: true });
@@ -49,10 +52,8 @@ const uploadFileHandler = async (file, req) => {
     const localFileName = `local-${timestamp}${fileExtension}`;
     const localPath = path.join(uploadDir, localFileName);
 
-    // Tulis buffer ke file fisik
     fs.writeFileSync(localPath, file.buffer);
 
-    // Return URL Localhost
     return `${req.protocol}://${req.get('host')}/uploads/${localFileName}`;
   }
 };

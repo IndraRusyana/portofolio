@@ -16,14 +16,15 @@ provider:
     DATABASE_URL: ${.env:DATABASE_URL}
     AWS_BUCKET_NAME: ${.env:AWS_BUCKET_NAME}
 
-iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - s3:PutObject
-            - s3:GetObject
-          Resource: "arn:aws:s3:::portfolio-uploads-indra/*"
+  iam:
+      role:
+        statements:
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+              - s3:DeleteObject
+            Resource: "arn:aws:s3:::portfolio-uploads-indra/*"
 
 package:
   patterns:
