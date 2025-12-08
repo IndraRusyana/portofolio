@@ -55,10 +55,53 @@ body, .navbar, .card, section, footer {
 }
 
 /* =========================================
-   HERO SECTION UPDATE
+   HERO SECTION RESPONSIVE FIX
    ========================================= */
 
-/* 1. Typography & Readability */
+/* Default (Desktop) */
+.hero-section {
+    /* Pastikan tinggi minimal memenuhi layar */
+    min-height: 100vh;
+    padding-top: 80px; /* Jaga jarak aman dari navbar fixed di desktop */
+}
+
+/* Khusus Mobile (Layar < 992px) */
+@media (max-width: 991.98px) {
+    .hero-section {
+        min-height: auto; /* Jangan paksa full height di mobile agar bisa discroll */
+        padding-top: 120px; /* TAMBAH PADDING AGAR TURUN KE BAWAH NAVBAR */
+        padding-bottom: 60px;
+        text-align: center; /* Opsional: Rata tengah teks di mobile */
+    }
+    
+    /* Atur ulang ukuran gambar di mobile agar proporsional */
+    .hero-avatar {
+        max-width: 70% !important; /* Perbesar sedikit dari 50% di mobile */
+        margin-bottom: 2rem;
+    }
+
+    /* Blob background di mobile */
+    .hero-blob {
+        width: 250px;
+        height: 250px;
+        top: 40%; /* Geser blob sedikit ke atas */
+    }
+
+    /* Rata tengah tombol aksi di mobile */
+    .d-flex.gap-3 {
+        justify-content: center;
+    }
+    
+    /* Hapus padding kanan teks di mobile */
+    .pe-lg-5 {
+        padding-right: 0 !important;
+    }
+    
+    /* Garis dekorasi 'Hello' rata tengah */
+    .d-flex.align-items-center.gap-2 {
+        justify-content: center;
+    }
+}
 .ls-2 {
     letter-spacing: 2px;
     font-size: 0.85rem;
@@ -305,9 +348,15 @@ body, .navbar, .card, section, footer {
 }
 
 .offer-card.active {
-    background-color: #6610f2; /* Ungu saat aktif di light mode */
+    background-color: #6610f2;
     color: white;
-    transform: scale(1.05); /* Sedikit lebih besar */
+    z-index: 2;
+}
+
+@media (min-width: 992px) {
+    .offer-card.active {
+        transform: scale(1.1); /* Efek zoom hanya di desktop */
+    }
 }
 
 /* 3. DARK MODE STYLES (Sesuai Referensi Gambar) */

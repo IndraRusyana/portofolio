@@ -5,7 +5,7 @@ const NavDetailProject = ({theme, toggleTheme}) => {
     return(
         <nav class="navbar navbar-expand-lg fixed-top shadow-sm py-3">
             <div class="container">
-                <Link class="navbar-brand text-primary fw-bold" to="/">DEV<span class="text-body">FOLIO.</span></Link>
+                <Link class="navbar-brand fw-bold" to="/">DEV<span>FOLIO.</span></Link>
                 <button 
                     onClick={toggleTheme} 
                     className={`btn btn-outline-secondary rounded-circle border-0 ${theme === 'dark' ? 'text-white' : ''}`}
