@@ -33,7 +33,9 @@ const PageContent = ({ theme, toggleTheme }) => {
             // PENTING: Kirim token di header
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
             await axios.delete(`${apiUrl}/api/projects/${id}`, {
-            headers: { token: token }
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                }
             });
             // Refresh data setelah hapus
             fetchProjects(); 

@@ -2,6 +2,7 @@ const pool = require('../Config/db');
 const fs = require('fs');
 const path = require('path');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
 require('dotenv').config();
 
 // --- 1. KONFIGURASI S3 CLIENT ---
@@ -161,9 +162,52 @@ const updateProject = async (req, res) => {
 const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
-    // Opsional: Anda bisa menambahkan logika di sini untuk menghapus gambar dari S3 
-    // menggunakan DeleteObjectCommand sebelum menghapus data dari DB.
+
+    // 1. Ambil data project dulu untuk mendapatkan URL gambar
+    const projectCheck = await pool.query('SELECT image_url FROM public.projects WHERE id = $1', [id]);
+
+    if (projectCheck.rows.length === 0) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    const imageUrl = projectCheck.rows[0].image_url;
+
+    // 2. Hapus Gambar dari S3 (Jika ada dan tersimpan di S3)
+    if (imageUrl && imageUrl.includes('amazonaws.com')) {
+      try {
+        // Ekstrak "Key" (Nama File) dari URL
+        // Contoh URL: https://bucket.s3.region.amazonaws.com/projects/123-gambar.png
+        // Kita butuh: projects/123-gambar.png
+        const urlParts = imageUrl.split('.com/');
+        if (urlParts.length > 1) {
+          const fileKey = urlParts[1]; // Ambil bagian setelah .com/
+
+          const deleteCommand = new DeleteObjectCommand({
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: fileKey,
+          });
+
+          await s3Client.send(deleteCommand);
+          console.log(`Berhasil menghapus gambar S3: ${fileKey}`);
+        }
+      } catch (s3Err) {
+        // Jangan stop proses delete DB cuma karena gagal hapus gambar (log saja)
+        console.error("Gagal menghapus gambar S3:", s3Err.message);
+      }
+    } 
+    // 3. Hapus Gambar Lokal (Jika mode development/lokal)
+    else if (imageUrl && imageUrl.includes('/uploads/')) {
+        // Logika hapus file lokal (opsional jika mau ditambahkan)
+        const path = require('path');
+        const fs = require('fs');
+        const fileName = imageUrl.split('/uploads/')[1];
+        const localPath = path.join(__dirname, '../uploads', fileName);
+        if (fs.existsSync(localPath)) fs.unlinkSync(localPath);
+    }
+
+    // 4. Hapus Data dari Database
     await pool.query('DELETE FROM public.projects WHERE id = $1', [id]);
+    
     res.json({ message: "Project deleted successfully" });
   } catch (err) {
     console.error(err.message);

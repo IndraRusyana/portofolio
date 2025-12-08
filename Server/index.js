@@ -13,14 +13,18 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'token', 'x-requested-with']
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// --- [CATATAN PENTING: Static Files di Lambda] ---
-// Di Lambda, folder 'uploads' lokal tidak akan bekerja permanen (file hilang saat Lambda restart).
-// Untuk development lokal, baris ini tetap aman. Tapi di Production (AWS), 
-// Anda sebaiknya menggunakan AWS S3 untuk menyimpan file.
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // GUNAKAN ROUTES
@@ -43,8 +47,6 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-// --- [MODIFIKASI 2: Logika Dual Mode] ---
-// Cek apakah file ini dijalankan langsung (node index.js) atau di-import (oleh AWS Lambda)
 if (require.main === module) {
   // JIKA LOKAL: Jalankan app.listen seperti biasa
   app.listen(port, () => {
@@ -52,6 +54,7 @@ if (require.main === module) {
   });
 } else {
   // JIKA LAMBDA: Jangan jalankan app.listen, tapi export handler
-  // AWS akan memanggil handler ini
-  module.exports.handler = serverless(app);
+  module.exports.handler = serverless(app, {
+    binary: ['image/*', 'multipart/form-data'] 
+  });
 }
