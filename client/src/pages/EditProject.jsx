@@ -98,8 +98,7 @@ const EditProject = () => {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       await axios.put(`${apiUrl}/api/projects/${id}`, formData, {
         headers: { 
-          token: token,
-          // Jangan set Content-Type manual, biarkan Axios yang atur
+          'Authorization': `Bearer ${token}`
         }
       });
 
