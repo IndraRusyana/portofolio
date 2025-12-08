@@ -100,6 +100,14 @@ body {
     margin-left: 0; /* Konten jadi full width */
 }
 
+/* === CONTENT STYLE === */
+#page-content-wrapper {
+    width: 100%;
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin 0.3s ease-out;
+}
+
 /* === MOBILE RESPONSIVE (LAYAR KECIL) === */
 @media (max-width: 768px) {
     
@@ -109,7 +117,7 @@ body {
     }
 
     #page-content-wrapper {
-        margin-left: 0; /* Default full width di HP */
+        margin-left: 0 !important; /* Default full width di HP */
     }
 
     /* Kondisi 3: Di Mobile, jika ditoggle, sidebar MUNCUL */
@@ -122,14 +130,6 @@ body {
         opacity: 0.5; 
         pointer-events: none; /* Mencegah klik konten saat sidebar buka */
     }
-}
-
-/* === CONTENT STYLE === */
-#page-content-wrapper {
-    width: 100%;
-    margin-left: 260px;
-    padding: 20px;
-    transition: margin 0.3s ease-out;
 }
 
 /* Stats Cards */

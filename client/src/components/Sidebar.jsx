@@ -21,6 +21,12 @@ const Sidebar = ({ toggleSidebar }) => {
     <div id="sidebar-wrapper">
         <div className="sidebar-heading">
             <i className="fas fa-layer-group me-2"></i> DevFolio<span className="text-primary">Admin</span>
+            <button 
+                className="btn btn-link text-white d-md-none btn-sm" 
+                onClick={toggleSidebar}
+            >
+                <i className="fas fa-times fa-lg"></i>
+            </button>
         </div>
         <div className="list-group list-group-flush mt-3">
             {/* Tambahkan onClick handleMobileClick di setiap Link */}
