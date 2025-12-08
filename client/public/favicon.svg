@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    /* Ini agar huruf 'F' berubah putih otomatis jika browser mode gelap */
+    .text-adaptive { fill: #6610f2; }
+    @media (prefers-color-scheme: dark) {
+      .text-adaptive { fill: #ffffff; }
+    }
+  </style>
+  
+  <text x="5" y="80" font-family="Arial, sans-serif" font-weight="900" font-size="85" fill="#6610f2">D</text>
+  
+  <text x="55" y="80" font-family="Arial, sans-serif" font-weight="900" font-size="85" class="text-adaptive">F</text>
+</svg>

@@ -147,8 +147,26 @@ body, .navbar, .card, section, footer {
     background-color: rgba(255, 255, 255, 0.95);
 }
 .navbar-brand { font-weight: 800; letter-spacing: -0.5px; }
-.nav-link { font-weight: 500; color: #64748b; transition: 0.3s; }
-.nav-link:hover, .nav-link.active { color: var(--primary-color); }
+.navbar-brand span { color: #6610f2; } /* Ungu */
+.navbar-nav .nav-link {
+    color: var(--bs-body-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: #6610f2 !important; /* Ungu */
+}
+.navbar-nav .nav-link.active-link {
+    color: #6610f2 !important; /* Ungu menyala */
+    font-weight: 700 !important;
+}
+.btn-contact-nav {
+    border-color: #6610f2 !important;
+    background-color: #6610f2 !important;
+}
+.btn-contact-nav:hover {
+    background-color: #520dc2 !important;
+}
 
 /* Buttons */
 .btn-primary {

@@ -89,10 +89,10 @@ const EditProject = () => {
       }
 
       // DEBUGGING: Cek isi amplop sebelum dikirim
-      console.log("Mengirim data ke Backend...");
-      for (let [key, value] of formData.entries()) {
-           console.log(`${key}:`, value);
-      }
+      // console.log("Mengirim data ke Backend...");
+      // for (let [key, value] of formData.entries()) {
+      //      console.log(`${key}:`, value);
+      // }
 
       // Kirim Request
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
