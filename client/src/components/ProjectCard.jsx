@@ -8,14 +8,14 @@ const ProjectCard = ({ project }) => {
       
       {/* Gambar Project */}
       <div className="position-relative overflow-hidden">
-        <Link to={`/projects/${project.id}`}>
+        {/* <Link to={`/projects/${project.id}`}> */}
           {/* 1. CSS Class untuk gambar agar seragam */}
           <img 
             src={project.image_url || "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
             className="card-img-top project-card-img" 
             alt={project.title} 
           />
-        </Link>
+        {/* </Link> */}
       </div>
 
       <div className="card-body p-4 d-flex flex-column"> {/* Flex column agar footer terdorong ke bawah */}

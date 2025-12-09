@@ -18,7 +18,7 @@ const PageContent = ({ theme, toggleTheme, toggleSidebar }) => {
 
     const fetchProjects = async () => {
         try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
         const response = await axios.get(`${apiUrl}/api/projects`);
         setProjects(response.data);
         } catch (error) {
@@ -31,7 +31,7 @@ const PageContent = ({ theme, toggleTheme, toggleSidebar }) => {
         try {
             const token = localStorage.getItem('token');
             // PENTING: Kirim token di header
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
             await axios.delete(`${apiUrl}/api/projects/${id}`, {
                 headers: { 
                     'Authorization': `Bearer ${token}`
