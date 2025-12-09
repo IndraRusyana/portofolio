@@ -46,14 +46,28 @@ const ProjectCard = ({ project }) => {
       <div className="card-footer bg-transparent border-0 p-4 pt-0">
           <hr className="text-muted opacity-25" />
           <div className="d-flex justify-content-between align-items-center">
-              <a href={project.repo_link} target="_blank" rel="noopener noreferrer"
-                  className="btn btn-sm btn-outline-dark d-flex align-items-center gap-2">
-                  <FaGithub /> <span className="d-none d-sm-inline">Repository</span> {/* Teks sembunyi di HP sangat kecil */}
+            {project.repo_link && (
+              <a 
+                href={project.repo_link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-sm btn-outline-dark d-flex align-items-center gap-2"
+              >
+                <FaGithub /> 
+                <span className="d-none d-sm-inline">Repository</span>
               </a>
-              <a href={project.live_link} target="_blank" rel="noopener noreferrer"
-                  className="btn btn-sm btn-outline-dark d-flex align-items-center gap-2">
-                  Live Demo <i className="fas fa-external-link-alt"></i>
+            )}
+
+            {project.live_link && (
+              <a 
+                href={project.live_link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-sm btn-outline-dark d-flex align-items-center gap-2"
+              >
+                Live Demo <i className="fas fa-external-link-alt"></i>
               </a>
+            )}
           </div>
       </div>
     </div>
